@@ -13,7 +13,11 @@ git clone https://github.com/faricaav/MidTest_Dans.git
  ```sh
  npm install
  ```
- 2. Start
+ 2. Migrate DB
+ ```sh
+ sequelize db:migrate
+ ```
+ 3. Start
  ```sh
  npm start
  ```
