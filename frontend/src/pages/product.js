@@ -13,7 +13,7 @@ export default function Product() {
 
   const { userInfo } = useSelector((state) => state.auth)
 
-    if(!localStorage.getItem('userToken') || userInfo===null){
+    if(!localStorage.getItem('userToken') || userInfo===null || userInfo.logged === false){
         localStorage.removeItem('userToken')
         window.location="/"
     }
