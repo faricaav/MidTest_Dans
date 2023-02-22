@@ -6,7 +6,7 @@ import { MdEmail } from 'react-icons/md'
 export default function Dashboard(){
     const { userInfo } = useSelector((state) => state.auth)
     console.log(userInfo)
-    if(!localStorage.getItem('userToken') || userInfo===null){
+    if(!localStorage.getItem('userToken') || userInfo===null || userInfo.logged === false){
         localStorage.removeItem('userToken')
         window.location="/"
     }
