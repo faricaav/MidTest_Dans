@@ -15,8 +15,8 @@ const user = model.user
 const auth = require('../auth')
 
 //endpoint menampilkan semua data user, method: GET, function: findAll()
-app.get("/", auth, (req,res) => {
-    user.findAll()
+app.get("/", auth, async(req,res) => {
+    await user.findAll()
         .then(result => {
             res.json({
                 user : result
@@ -30,8 +30,8 @@ app.get("/", auth, (req,res) => {
 })
 
 //endpoint untuk menampilkan data user berdasarkan id
-app.get("/:id", auth, (req, res) =>{
-    user.findOne({ where: {id_user: req.params.id}})
+app.get("/:id", auth, async(req, res) =>{
+    await user.findOne({ where: {id_user: req.params.id}})
     .then(result => {
         res.json(result)
     })
@@ -75,7 +75,7 @@ app.post("/", async(req,res) => {
 })
 
 //endpoint mengupdate data user, METHOD: PUT, function:update
-app.put("/:id", auth, (req,res) => {
+app.put("/:id", auth, async(req,res) => {
     let param = {
         id_user : req.params.id
     }
@@ -85,7 +85,7 @@ app.put("/:id", auth, (req,res) => {
         password : md5(req.body.password),
         email : req.body.email
     }
-    user.update(data, {where: param})
+    await user.update(data, {where: param})
         .then(result => {
             res.json({
                 message: "data has been updated"
@@ -99,11 +99,11 @@ app.put("/:id", auth, (req,res) => {
 })
 
 //endpoint menghapus data user, METHOD: DELETE, function: destroy
-app.delete("/:id", auth, (req,res) => {
+app.delete("/:id", auth, async(req,res) => {
     let param = {
         id_user : req.params.id
     }
-    user.destroy({where: param})
+    await user.destroy({where: param})
         .then(result => {
             res.json({
                 message: "data has been deleted"

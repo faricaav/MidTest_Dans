@@ -1,8 +1,6 @@
 const jwt = require("jsonwebtoken")
-const SECRET_KEY = "Cafe"
-
-auth = () => {
-    return (req, res, next) => {
+const SECRET_KEY = "midtest"
+auth = (req, res, next) => {
     let header = req.headers.authorization
     let token = header && header.split(" ")[1]
 
@@ -12,7 +10,7 @@ auth = () => {
     if(token == null){
         res.status(401).json({ message: "Unauthorized"})
     }else{
-        jwt.verify(token, SECRET_KEY, jwtHeader, (error,user) => {
+        jwt.verify(token, SECRET_KEY, jwtHeader, (error, user) => {
             if (error) {
                 res
                 .status(401)
@@ -20,10 +18,10 @@ auth = () => {
                     message: "Invalid token"
                 })
             } else {
-                return res.json({message: "You don't have access"})
+                console.log(user);
+                next()
             }
         })
-    }
     }
 }
 

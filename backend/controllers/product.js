@@ -3,10 +3,9 @@ const {getProduct, getProductById} = require("../modules/product")
 const redis = require('../library/redis')
 
 const getProductData = async (req, res) => {
-    const redis_key = "get_product";
-    const { reply } = await redis.get(redis_key);
-
     try{
+        const redis_key = "get_product";
+        const { reply } = await redis.get(redis_key);
         const response = await getProduct();
         const dataProduct = response.data;
         let result = dataProduct;
@@ -28,12 +27,11 @@ const getProductData = async (req, res) => {
 }
 
 const getProductDataById = async (req, res) => {
-    const id = req.params.id;
-    const id_number = Number(id);
-    const redis_key = `get_product_by_id:${id}`;
-    const { reply } = await redis.get(redis_key);
-
     try{
+        const id = req.params.id;
+        const id_number = Number(id);
+        const redis_key = `get_product_by_id:${id}`;
+        const { reply } = await redis.get(redis_key);
         const response = await getProductById(id_number);
         const dataProduct = response.data;
         let result = dataProduct;

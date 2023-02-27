@@ -1,18 +1,17 @@
 import axios from "axios";
 
-const http = axios.create({
-  baseURL: "http://localhost:8080",
-  headers: {
-    "Content-type": "application/json"
-  }
-});
-
 const getAll = () => {
-    return http.get("/product");
+    return axios.get("http://localhost:8080/product", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+      }});
 };
 
 const get = id => {
-    return http.get(`/product/${id}`);
+    return axios.get(`http://localhost:8080/product/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+      }});
 };
 
 const ProductService = {
